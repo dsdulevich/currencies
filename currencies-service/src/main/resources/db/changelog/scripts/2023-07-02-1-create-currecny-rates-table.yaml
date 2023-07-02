@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-rates-table
+      author: dds
+      changes:
+        - createTable:
+            tableName: rates
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rate
+                  type: decimal
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date
+                  type: timestamp
