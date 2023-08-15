@@ -25,3 +25,21 @@ databaseChangeLog:
               - column:
                   name: date
                   type: timestamp
+  - changeSet:
+      id: create-currencies-table
+      author: dds
+      changes:
+        - createTable:
+            tableName: currencies
+            columns:
+              - column:
+                  name: id
+                  type: varchar(256)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(256)
+                  constraints:
+                    nullable: false

@@ -9,10 +9,10 @@ import java.time.LocalDate;
 @Service
 public class DateValidator {
 
-    @Value("dds.currencies.start-date")
+    @Value("${dds.currencies.start-date}")
     private LocalDate START_DATE;
 
-    @Value("dds.currencies.end-date")
+    @Value("${dds.currencies.end-date}")
     private LocalDate END_DATE;
 
     public void validateDates(final LocalDate startDate, final LocalDate endDate) {

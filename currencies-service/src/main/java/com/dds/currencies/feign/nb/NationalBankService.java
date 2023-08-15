@@ -2,7 +2,6 @@ package com.dds.currencies.feign.nb;
 
 import com.dds.currencies.feign.nb.dto.CurrencyNationalBankDto;
 import com.dds.currencies.feign.nb.dto.CurrencyRateNationalBankDto;
-import com.dds.currencies.service.currency.CurrencyService;
 import com.dds.currencies.service.util.DateUtilService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +18,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class NationalBankService {
     private final NationalBankClient client;
-    private final CurrencyService currencyService;
     private final DateUtilService dateUtilService;
 
     public List<CurrencyNationalBankDto> getCurrencies() {
@@ -35,7 +33,7 @@ public class NationalBankService {
         }
     }
 
-    public List<CurrencyRateNationalBankDto> getCurrencyRates(String code, LocalDateTime startDate, LocalDateTime endDate) {
-        return client.getCurrencyRates(currencyService.getCurrencyIdByCode(code), startDate, endDate);
+    public List<CurrencyRateNationalBankDto> getCurrencyRates(String id, LocalDateTime startDate, LocalDateTime endDate) {
+        return client.getCurrencyRates(id, startDate, endDate);
     }
 }

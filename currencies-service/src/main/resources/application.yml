@@ -33,7 +33,12 @@ server:
   error:
     include-message: always
 
+logging:
+  level:
+    root: ${LOG_LEVEL:INFO}
+    com.dds: ${LOG_LEVEL_DDS:DEBUG}
+
 dds:
   currencies:
-    start-date: ${START_DATE:2022-12-1}
-    end-date: ${START_DATE:2023-5-31}
+    start-date: ${START_DATE:2022-12-01}
+    end-date: ${START_DATE:2023-05-31}

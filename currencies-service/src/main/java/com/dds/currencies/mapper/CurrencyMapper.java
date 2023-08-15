@@ -10,6 +10,8 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CurrencyMapper {
 
-    @Mapping(target = "id", source = "currencyId")
     List<CurrencyEntity> map(List<CurrencyNationalBankDto> rate);
+
+    @Mapping(target = "id", source = "dto.currencyId")
+    CurrencyEntity map(CurrencyNationalBankDto dto);
 }

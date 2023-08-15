@@ -31,21 +31,25 @@ public class CurrencyService {
         updateCurrencies();
     }
 
-    @Scheduled(cron = "0 1 * * * ?")
+    @Scheduled(cron = "0 0 1 * * ?")
     public void updateCurrencies() {
         final List<CurrencyNationalBankDto> currenciesList = nationalBankService.getCurrencies();
 
-        if (currenciesList.isEmpty()) {
+        if (currenciesList.isEmpty() && currencies.isEmpty()) {
             currencies = currencyRepository.findAll()
                     .stream()
                     .collect(Collectors.toMap(CurrencyEntity::getCode, CurrencyEntity::getId));
-        } else {
-            currencyRepository.deleteAll();
-            currencyRepository.saveAll(currencyMapper.map(currenciesList));
 
-            currencies = currenciesList
+        } else if (!currenciesList.isEmpty()) {
+            final Map<String, String> currenciesFromNationalBank = currenciesList
                     .stream()
                     .collect(Collectors.toMap(CurrencyNationalBankDto::getCode, CurrencyNationalBankDto::getCurrencyId));
+            if (!currenciesFromNationalBank.equals(currencies)) {
+                currencyRepository.deleteAll();
+                currencyRepository.saveAll(currencyMapper.map(currenciesList));
+
+                currencies = currenciesFromNationalBank;
+            }
         }
     }
 
