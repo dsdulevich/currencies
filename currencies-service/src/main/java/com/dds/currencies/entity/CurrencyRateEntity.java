@@ -24,17 +24,4 @@ public class CurrencyRateEntity {
     private String code;
     private LocalDate date;
     private Double rate;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CurrencyRateEntity that = (CurrencyRateEntity) o;
-        return Objects.equals(code, that.code) && Objects.equals(date, that.date) && Objects.equals(rate, that.rate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(code, date, rate);
-    }
 }

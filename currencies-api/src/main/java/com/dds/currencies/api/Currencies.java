@@ -40,8 +40,8 @@ public interface Currencies {
             )
     })
     List<CurrencyRate> syncCurrencyRates(@RequestParam("code") String code,
-                            @RequestParam("startDate") LocalDate startDate,
-                            @RequestParam("endDate") LocalDate endDate);
+                                         @RequestParam("startDate") LocalDate startDate,
+                                         @RequestParam("endDate") LocalDate endDate);
 
     @GetMapping("/currency")
     @Operation(summary = "Получение ежедневных курсов валют по заданному типу")
@@ -82,6 +82,6 @@ public interface Currencies {
             )
     })
     Double getAverageRate(@RequestParam("code") String code,
-                              @RequestParam("year") Integer year,
-                              @RequestParam("month") Integer month);
+                          @RequestParam("year") Integer year,
+                          @RequestParam("month") Integer month);
 }
