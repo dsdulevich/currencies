@@ -32,3 +32,8 @@ server:
   forward-headers-strategy: framework
   error:
     include-message: always
+
+dds:
+  currencies:
+    start-date: ${START_DATE:2022-12-1}
+    end-date: ${START_DATE:2023-5-31}

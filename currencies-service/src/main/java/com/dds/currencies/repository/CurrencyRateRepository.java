@@ -9,9 +9,9 @@ import java.util.Set;
 
 public interface CurrencyRateRepository extends JpaRepository<CurrencyRateEntity, Long> {
 
-    long countByCodeAndDateBetween(String id, LocalDate startDate, LocalDate endDate);
+    long countByCodeAndDateBetween(String code, LocalDate startDate, LocalDate endDate);
 
-    List<CurrencyRateEntity> findAllByCode(String id);
+    List<CurrencyRateEntity> findAllByCode(String code);
 
-    Set<CurrencyRateEntity> findAllByCodeAndDateBetween(String id, LocalDate startDate, LocalDate endDate);
+    Set<CurrencyRateEntity> findAllByCodeAndDateBetween(String code, LocalDate startDate, LocalDate endDate);
 }

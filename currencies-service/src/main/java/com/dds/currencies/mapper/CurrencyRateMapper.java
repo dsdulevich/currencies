@@ -11,13 +11,7 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring")
 public interface CurrencyRateMapper {
 
-    List<CurrencyRate> map(List<CurrencyRateEntity> rate);
+    List<CurrencyRate> mapToDto(List<CurrencyRateEntity> rate);
 
-    default List<CurrencyRateEntity> mapDtoToEntity(List<CurrencyRateNationalBankDto> rates, String code) {
-        return rates.stream().map(r -> new CurrencyRateEntity()
-                        .setCode(code)
-                        .setDate(r.getDate())
-                        .setRate(r.getRate()))
-                .collect(Collectors.toList());
-    }
+    List<CurrencyRateEntity> mapToEntity(List<CurrencyRate> rate);
 }

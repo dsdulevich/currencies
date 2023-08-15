@@ -1,15 +1,21 @@
-package com.dds.currencies.utils;
+package com.dds.currencies.validator;
 
 import com.dds.currencies.exception.CurrencyValidationException;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
+@Service
 public class DateValidator {
 
-    private static final LocalDate START_DATE = LocalDate.of(2022, 12, 1);
-    private static final LocalDate END_DATE = LocalDate.of(2023, 5, 31);
+    @Value("dds.currencies.start-date")
+    private LocalDate START_DATE;
 
-    public static void validateDates(final LocalDate startDate, final LocalDate endDate) {
+    @Value("dds.currencies.end-date")
+    private LocalDate END_DATE;
+
+    public void validateDates(final LocalDate startDate, final LocalDate endDate) {
         if (startDate.isAfter(endDate)){
             throw new CurrencyValidationException("Invalid range. Start date is larger than end date");
         }
@@ -21,7 +27,7 @@ public class DateValidator {
         }
     }
 
-    public static void validatesYearAndMonth(final Integer year, final Integer month){
+    public void validatesYearAndMonth(final Integer year, final Integer month){
         final LocalDate date = LocalDate.of(year, month, 1);
         if (date.isBefore(START_DATE)){
             throw new CurrencyValidationException("Out of range. Date is before " + START_DATE);
