@@ -16,16 +16,15 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 public class CurrencyRateService {
-    private final WeekendsService weekendsService;
-
     private final CurrencyRateRepository currencyRateRepository;
     private final CurrencyRateMapper currencyRateMapper;
+    private final WeekendsService weekendsService;
 
-    public List<CurrencyRate> findAllByCode(String code){
+    public List<CurrencyRate> findAllByCode(final String code){
         return currencyRateMapper.mapToDto(currencyRateRepository.findAllByCode(code));
     }
 
-    public Double getAverageRate(String code, LocalDate startDate, LocalDate endDate){
+    public Double getAverageRate(final String code, final LocalDate startDate, final LocalDate endDate){
         final Set<LocalDate> workingDates = weekendsService.getWorkingDates(startDate, endDate);
 
         final List<CurrencyRateEntity> workingRates = currencyRateRepository.findAllByCodeAndDateBetween(code, startDate, endDate)
@@ -44,15 +43,15 @@ public class CurrencyRateService {
         return Math.pow(product, 1.0 / workingRates.size());
     }
 
-    public long countByCodeAndDateBetween(String code, LocalDate startDate, LocalDate endDate){
+    public long countByCodeAndDateBetween(final String code, final LocalDate startDate, final LocalDate endDate){
         return currencyRateRepository.countByCodeAndDateBetween(code, startDate, endDate);
     }
 
-    public List<CurrencyRate> findAllByCodeAndDateBetween(String code, LocalDate startDate, LocalDate endDate){
+    public List<CurrencyRate> findAllByCodeAndDateBetween(final String code, final LocalDate startDate, final LocalDate endDate){
         return currencyRateMapper.mapToDto(currencyRateRepository.findAllByCodeAndDateBetween(code, startDate, endDate).stream().toList());
     }
 
-    public void saveAll(List<CurrencyRate> rate){
+    public void saveAll(final List<CurrencyRate> rate){
         currencyRateRepository.saveAll(currencyRateMapper.mapToEntity(rate));
     }
 }

@@ -39,7 +39,6 @@ public class CurrencyService {
             currencies = currencyRepository.findAll()
                     .stream()
                     .collect(Collectors.toMap(CurrencyEntity::getCode, CurrencyEntity::getId));
-
         } else if (!currenciesList.isEmpty()) {
             final Map<String, String> currenciesFromNationalBank = currenciesList
                     .stream()
